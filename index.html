@@ -3,991 +3,435 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lenses by Kas | Weddings & Portraits in Surulere, Lagos</title>
-  <meta name="description" content="Lenses by Kas is a premium photography brand in Surulere, Lagos by Adebola Samuel, offering weddings, portraits, anniversary shoots, and event photography." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Styledbylayo — Premium Fashion House Concept</title>
+  <meta name="description" content="A premium website concept for Styledbylayo, a Lagos-based fashion house creating bridal, custom, ready-to-wear pieces and fashion education." />
+
+  <meta property="og:title" content="Styledbylayo — Premium Fashion House Concept" />
+  <meta property="og:description" content="Bridal, custom pieces, ready-to-wear, worldwide shipping and fashion academy experience." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="butterfly-beaded-evening-gown.1.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --ink: #08090e;
-      --ink-2: #0e101a;
-      --cream: #f6f0e4;
-      --cream-dim: rgba(246,240,228,0.62);
-      --cream-ghost: rgba(246,240,228,0.22);
-      --gold: #c9973a;
-      --gold-light: #e8c26a;
-      --gold-pale: rgba(201,151,58,0.14);
-      --line: rgba(246,240,228,0.1);
-      --line-soft: rgba(246,240,228,0.06);
-      --max: 1140px;
-      --r: 28px;
-      --r-sm: 18px;
+      --black: #080706;
+      --soft-black: #12100e;
+      --ivory: #f8f3ea;
+      --cream: #efe3d0;
+      --champagne: #d6b77a;
+      --gold: #b98d45;
+      --brown: #3a281e;
+      --muted: #8a7a68;
+      --white: #ffffff;
+      --line: rgba(185, 141, 69, 0.25);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      font-family: "Outfit", sans-serif;
-      background: var(--ink);
-      color: var(--cream);
+      background: var(--ivory);
+      color: var(--black);
+      font-family: "Inter", sans-serif;
       overflow-x: hidden;
-      line-height: 1.6;
     }
 
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    ::selection { background: var(--gold); color: var(--ink); }
+    img, video {
+      max-width: 100%;
+      display: block;
+    }
 
-    /* ── LOADER ── */
-    #loader {
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* OPENING LOGO ANIMATION */
+    .loader {
       position: fixed;
       inset: 0;
-      z-index: 9999;
-      background: var(--ink);
+      background:
+        radial-gradient(circle at 50% 42%, rgba(214, 183, 122, 0.16), transparent 34%),
+        #050403;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      transition: opacity 0.7s ease, visibility 0.7s ease;
+      z-index: 9999;
+      animation: loaderExit 1s ease forwards;
+      animation-delay: 3s;
     }
 
-    #loader.done {
+    .loader::before,
+    .loader::after {
+      content: "";
+      position: absolute;
+      width: 1px;
+      height: 160px;
+      background: linear-gradient(transparent, rgba(214, 183, 122, 0.55), transparent);
       opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
+      animation: lineReveal 2.4s ease forwards;
+    }
+
+    .loader::before {
+      transform: rotate(90deg);
     }
 
     .loader-logo {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2.2rem;
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--cream);
+      width: min(240px, 48vw);
+      filter: invert(1) drop-shadow(0 0 24px rgba(214, 183, 122, 0.22));
       opacity: 0;
-      animation: fadeUp 0.8s 0.2s forwards;
+      transform: scale(0.92);
+      animation: logoIntro 2.7s cubic-bezier(.2,.8,.2,1) forwards;
     }
 
-    .loader-bar-wrap {
-      width: 120px;
-      height: 1px;
-      background: var(--line);
-      overflow: hidden;
-      opacity: 0;
-      animation: fadeUp 0.6s 0.5s forwards;
+    @keyframes logoIntro {
+      0% { opacity: 0; transform: scale(0.88); filter: invert(1) blur(4px); }
+      45% { opacity: 1; transform: scale(1); filter: invert(1) blur(0); }
+      100% { opacity: 1; transform: scale(1.045); filter: invert(1) drop-shadow(0 0 28px rgba(214, 183, 122, 0.2)); }
     }
 
-    .loader-bar {
-      height: 100%;
-      width: 0;
-      background: var(--gold);
-      animation: loadBar 1.4s 0.6s cubic-bezier(.4,0,.2,1) forwards;
+    @keyframes lineReveal {
+      0% { opacity: 0; transform: scaleY(0); }
+      45% { opacity: 1; transform: scaleY(1); }
+      100% { opacity: 0; transform: scaleY(1.1); }
     }
 
-    @keyframes loadBar {
-      to { width: 100%; }
+    @keyframes loaderExit {
+      to {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: none; }
-    }
-
-    /* ── GRAIN ── */
-    .grain {
+    /* NAV */
+    .nav {
       position: fixed;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.12;
-      z-index: 9998;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 500;
-      padding: 20px 0;
-      transition: background 0.4s, border-color 0.4s, padding 0.4s;
-      border-bottom: 1px solid transparent;
-    }
-
-    nav.scrolled {
-      background: rgba(8,9,14,0.82);
-      backdrop-filter: blur(24px);
-      border-color: var(--line-soft);
-      padding: 14px 0;
-    }
-
-    .nav-inner {
-      width: min(100% - 36px, var(--max));
-      margin-inline: auto;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      padding: 18px clamp(18px, 4vw, 56px);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      color: var(--white);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.72), transparent);
+      transition: background 0.3s ease, padding 0.3s ease;
     }
 
-    .logo {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.2rem;
-      font-weight: 300;
-      letter-spacing: 0.16em;
+    .nav.scrolled {
+      background: rgba(8, 7, 6, 0.9);
+      backdrop-filter: blur(18px);
+      padding-block: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      letter-spacing: 0.16em;
+      font-size: 0.72rem;
+      text-transform: uppercase;
     }
 
-    .logo-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gold);
+    .nav-brand img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      filter: invert(1);
     }
 
     .nav-links {
-      display: flex;
+      display: none;
       gap: 28px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.18em;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      letter-spacing: 0.16em;
     }
 
-    .nav-links a { transition: color 0.2s; }
-    .nav-links a:hover { color: var(--cream); }
-
     .nav-cta {
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 10px 20px;
+      padding: 11px 16px;
+      border: 1px solid rgba(255,255,255,0.45);
       border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--cream-dim);
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: 0.25s ease;
     }
 
     .nav-cta:hover {
-      color: var(--cream);
-      border-color: var(--gold);
-      background: var(--gold-pale);
+      background: var(--white);
+      color: var(--black);
     }
 
-    .burger {
-      display: none;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      border: 1px solid var(--line);
-      background: transparent;
-      cursor: pointer;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-    }
-
-    .burger span {
-      width: 18px; height: 1.5px;
-      background: var(--cream);
-      border-radius: 999px;
-      transition: 0.25s;
-    }
-
-    .mob-menu {
-      position: fixed;
-      top: 72px; left: 16px; right: 16px;
-      z-index: 499;
-      background: rgba(10,11,18,0.96);
-      backdrop-filter: blur(28px);
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      padding: 10px;
-      display: none;
-    }
-
-    .mob-menu.open { display: block; }
-
-    .mob-menu a {
-      display: block;
-      padding: 14px 16px;
-      color: var(--cream-dim);
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--line-soft);
-      transition: color 0.2s;
-    }
-
-    .mob-menu a:last-child { border-bottom: 0; }
-    .mob-menu a:hover { color: var(--cream); }
-
-    /* ── HERO ── */
+    /* HERO */
     .hero {
-      min-height: 100svh;
+      min-height: 100vh;
       position: relative;
+      color: var(--white);
       display: flex;
       align-items: flex-end;
       overflow: hidden;
+      background: var(--black);
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('kas-wedding-look11.jpg') center / cover no-repeat;
-      transform-origin: center;
-      animation: heroPan 18s ease-in-out infinite alternate;
+      z-index: 0;
     }
 
-    @keyframes heroPan {
-      from { transform: scale(1.06) translate(0, 0); }
-      to { transform: scale(1.12) translate(-2%, -1.5%); }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      transform: scale(1.04);
+      animation: heroSlowZoom 12s ease forwards;
     }
 
-    .hero-overlay {
+    .hero::after {
+      content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg,
-          rgba(8,9,14,0.38) 0%,
-          rgba(8,9,14,0.1) 40%,
-          rgba(8,9,14,0.72) 72%,
-          rgba(8,9,14,1) 100%
-        );
+        linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.38), rgba(0,0,0,0.55)),
+        radial-gradient(circle at 70% 20%, rgba(185, 141, 69, 0.16), transparent 32%);
+      z-index: 1;
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      width: min(100% - 36px, var(--max));
-      margin-inline: auto;
-      padding-bottom: 72px;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      padding: 140px clamp(20px, 6vw, 88px) 58px;
+      max-width: 980px;
     }
 
-    .hero-tag {
+    .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 9px;
-      font-size: 0.66rem;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 20px;
-      opacity: 0;
-      animation: fadeUp 0.8s 2.1s forwards;
-    }
-
-    .hero-tag-line {
-      width: 24px; height: 1px;
-      background: var(--gold);
-    }
-
-    .hero-h1 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(4.8rem, 16vw, 12rem);
-      font-weight: 300;
-      line-height: 0.86;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp 1s 2.3s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-
-    .hero-h1 em {
-      font-style: italic;
-      color: var(--cream-dim);
-    }
-
-    .hero-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-      opacity: 0;
-      animation: fadeUp 0.8s 2.6s forwards;
-    }
-
-    .hero-sub {
-      font-size: 0.88rem;
-      color: var(--cream-dim);
-      max-width: 340px;
-      font-weight: 300;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    /* ── BUTTONS ── */
-    .btn-gold {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 999px;
-      background: var(--gold);
-      color: var(--ink);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: transform 0.2s, background 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-gold:hover { transform: translateY(-2px); background: var(--gold-light); }
-
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      color: var(--cream-dim);
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: transform 0.2s, color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-ghost:hover {
-      transform: translateY(-2px);
-      color: var(--cream);
-      border-color: rgba(246,240,228,0.3);
-    }
-
-    .btn-wa {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 13px 26px;
-      border-radius: 999px;
-      background: #1fbe5e;
-      color: #04140a;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: transform 0.2s, background 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-wa:hover { transform: translateY(-2px); background: #2de875; }
-
-    /* ── TICKER ── */
-    .ticker {
-      overflow: hidden;
-      border-block: 1px solid var(--line-soft);
-      background: rgba(255,255,255,0.025);
-    }
-
-    .ticker-track {
-      display: flex;
-      gap: 0;
-      width: max-content;
-      animation: scroll 26s linear infinite;
-    }
-
-    .ticker-track span {
-      padding: 14px 18px;
-      font-size: 0.66rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-      white-space: nowrap;
-    }
-
-    .ticker-track b { color: var(--gold); margin: 0 4px; }
-
-    @keyframes scroll {
-      from { transform: translateX(0); }
-      to { transform: translateX(-50%); }
-    }
-
-    /* ── LAYOUT ── */
-    .wrap {
-      width: min(100% - 36px, var(--max));
-      margin-inline: auto;
-    }
-
-    section { padding: 96px 0; }
-
-    /* ── SECTION LABEL ── */
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.64rem;
-      font-weight: 700;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 18px;
-    }
-
-    .label-line { width: 20px; height: 1px; background: var(--gold); }
-
-    .display-title {
-      font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3rem, 7vw, 6.4rem);
-      font-weight: 300;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-    }
-
-    /* ── INTRO ── */
-    .intro-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 56px;
-    }
-
-    .intro-text-panel {
-      padding: 42px;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: rgba(255,255,255,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .intro-text-panel p {
-      color: var(--cream-dim);
-      font-size: 0.96rem;
-      font-weight: 300;
-      margin-bottom: 18px;
-      line-height: 1.75;
-    }
-
-    .intro-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 24px;
-    }
-
-    .pill {
-      padding: 8px 14px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      font-size: 0.66rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-    }
-
-    .intro-img-panel {
-      border-radius: var(--r);
-      overflow: hidden;
-      border: 1px solid var(--line);
-      position: relative;
-      min-height: 400px;
-    }
-
-    .intro-img-panel img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s ease;
-    }
-
-    .intro-img-panel:hover img { transform: scale(1.05); }
-
-    .float-card {
-      position: absolute;
-      left: 18px; right: 18px; bottom: 18px;
-      background: rgba(8,9,14,0.7);
-      backdrop-filter: blur(18px);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
-      padding: 16px 18px;
-      font-size: 0.82rem;
-      color: var(--cream-dim);
-    }
-
-    .float-card strong { display: block; color: var(--cream); margin-bottom: 3px; font-size: 0.9rem; }
-
-    /* ── SERVICES ── */
-    .services-section {
-      background: radial-gradient(circle at 30% 50%, rgba(201,151,58,0.06), transparent 55%),
-                  var(--ink-2);
-    }
-
-    .services-head {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
-      align-items: end;
-      margin-bottom: 52px;
-    }
-
-    .services-desc {
-      color: var(--cream-dim);
-      font-size: 0.9rem;
-      font-weight: 300;
-      max-width: 380px;
-      align-self: end;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
       gap: 12px;
-    }
-
-    .svc-card {
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      overflow: hidden;
-      background: rgba(255,255,255,0.038);
-      transition: transform 0.3s ease, border-color 0.3s;
-      cursor: default;
-    }
-
-    .svc-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(201,151,58,0.38);
-    }
-
-    .svc-img {
-      position: relative;
-      aspect-ratio: 3 / 4;
-      overflow: hidden;
-    }
-
-    .svc-img img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-      filter: saturate(0.9);
-    }
-
-    .svc-card:hover .svc-img img {
-      transform: scale(1.07);
-      filter: saturate(1.05);
-    }
-
-    .svc-num {
-      position: absolute;
-      top: 14px; left: 14px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      background: rgba(8,9,14,0.6);
-      backdrop-filter: blur(12px);
-      padding: 7px 11px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .svc-info {
-      padding: 20px 22px 24px;
-    }
-
-    .svc-info h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.65rem;
-      font-weight: 400;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .svc-info p {
-      color: var(--cream-dim);
-      font-size: 0.8rem;
-      font-weight: 300;
-      line-height: 1.6;
-    }
-
-    /* ── MOOD STRIP ── */
-    .mood {
-      position: relative;
-      overflow: hidden;
-      background: #060810;
-      padding: 0;
-    }
-
-    .mood-inner {
-      display: grid;
-      grid-template-columns: 0.7fr 1.3fr;
-      min-height: 560px;
-    }
-
-    .mood-copy {
-      padding: 72px 56px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border-right: 1px solid var(--line-soft);
-      background: radial-gradient(circle at 30% 60%, rgba(105,184,255,0.07), transparent 55%);
-    }
-
-    .mood-copy p {
-      color: var(--cream-dim);
-      font-size: 0.9rem;
-      font-weight: 300;
-      line-height: 1.8;
-      margin-top: 20px;
-      max-width: 300px;
-    }
-
-    .mood-photos {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
-
-    .mood-photo {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .mood-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.8s ease, filter 0.4s;
-      filter: saturate(0.85) brightness(0.9);
-    }
-
-    .mood-photo:hover img {
-      transform: scale(1.06);
-      filter: saturate(1) brightness(1);
-    }
-
-    .mood-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(8,9,14,0.6) 100%);
-      pointer-events: none;
-    }
-
-    /* ── GALLERY ── */
-    .gallery-section { background: var(--ink-2); }
-
-    .gallery-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 40px;
-    }
-
-    .mosaic {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: 160px;
-      gap: 10px;
-    }
-
-    .m-item {
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--line-soft);
-      position: relative;
-      cursor: default;
-    }
-
-    .m-item img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      transition: transform 0.7s ease, filter 0.4s;
-      filter: saturate(0.9);
-    }
-
-    .m-item:hover img {
-      transform: scale(1.08);
-      filter: saturate(1.05);
-    }
-
-    .m-item::after {
-      content: attr(data-l);
-      position: absolute;
-      bottom: 12px; left: 12px;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-      padding: 6px 10px;
-      background: rgba(8,9,14,0.52);
-      backdrop-filter: blur(12px);
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .m-w { grid-column: span 5; grid-row: span 2; }
-    .m-t { grid-column: span 3; grid-row: span 3; }
-    .m-s { grid-column: span 4; grid-row: span 2; }
-    .m-m { grid-column: span 4; grid-row: span 3; }
-
-    /* ── ABOUT ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      align-items: stretch;
-    }
-
-    .about-card {
-      padding: 48px;
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      background: rgba(255,255,255,0.04);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .about-card p {
-      color: var(--cream-dim);
-      font-size: 0.92rem;
-      font-weight: 300;
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-top: 32px;
-    }
-
-    .stat {
-      padding: 18px 14px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      text-align: center;
-    }
-
-    .stat strong {
-      display: block;
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2.4rem;
-      font-weight: 300;
-      color: var(--gold-light);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .stat span {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--cream-dim);
-    }
-
-    .about-photo {
-      border-radius: var(--r);
-      overflow: hidden;
-      border: 1px solid var(--line);
-      position: relative;
-      min-height: 520px;
-    }
-
-    .about-photo img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* ── CONTACT ── */
-    .contact-section { padding-bottom: 64px; }
-
-    .contact-panel {
-      border: 1px solid var(--line);
-      border-radius: var(--r);
-      padding: 56px;
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 36px;
-      align-items: center;
-      background:
-        radial-gradient(circle at 80% 20%, rgba(31,190,94,0.08), transparent 42%),
-        rgba(255,255,255,0.04);
-      backdrop-filter: blur(10px);
-    }
-
-    .contact-panel p {
-      color: var(--cream-dim);
-      font-size: 0.9rem;
-      font-weight: 300;
-      margin-top: 16px;
-      max-width: 480px;
-      line-height: 1.8;
-    }
-
-    .contact-actions { display: grid; gap: 10px; }
-
-    .info-chip {
-      padding: 16px 20px;
-      border: 1px solid var(--line-soft);
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
-    }
-
-    .info-chip span {
-      display: block;
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 3px;
-    }
-
-    .info-chip strong { font-size: 0.9rem; font-weight: 400; }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 28px 0;
-      border-top: 1px solid var(--line-soft);
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
       font-size: 0.74rem;
-      color: var(--cream-dim);
-      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--champagne);
+      margin-bottom: 18px;
     }
 
-    .footer-inner b { color: var(--cream); font-weight: 500; }
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--champagne);
+    }
 
-    /* ── REVEAL ── */
+    h1, h2, h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 500;
+      line-height: 0.95;
+    }
+
+    .hero h1 {
+      font-size: clamp(4rem, 14vw, 10.5rem);
+      letter-spacing: -0.06em;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      max-width: 660px;
+      font-size: clamp(1rem, 2.5vw, 1.22rem);
+      line-height: 1.8;
+      color: rgba(255,255,255,0.84);
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: 0.25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--ivory);
+      color: var(--black);
+    }
+
+    .btn-primary:hover {
+      background: var(--champagne);
+    }
+
+    .btn-outline {
+      border-color: rgba(255,255,255,0.45);
+      color: var(--white);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .hero-meta {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.12);
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .hero-stat {
+      background: rgba(8, 7, 6, 0.78);
+      color: var(--white);
+      padding: 22px;
+    }
+
+    .hero-stat strong {
+      display: block;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      color: var(--champagne);
+      font-weight: 500;
+    }
+
+    .hero-stat span {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.68);
+    }
+
+    @keyframes heroSlowZoom {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    /* GENERAL */
+    section {
+      padding: clamp(72px, 10vw, 132px) clamp(20px, 6vw, 88px);
+    }
+
+    .section-head {
+      max-width: 860px;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      color: var(--gold);
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: clamp(2.8rem, 8vw, 6.2rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+    }
+
+    .section-text {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.12rem);
+      line-height: 1.85;
+      max-width: 760px;
+    }
+
     .reveal {
       opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
     }
 
-    .reveal.in { opacity: 1; transform: none; }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 1024px) {
-      .intro-grid,
-      .about-grid,
-      .services-head { grid-template-columns: 1fr; }
-
-      .services-grid { grid-template-columns: repeat(2, 1fr); }
-
-      .mood-inner { grid-template-columns: 1fr; }
-      .mood-copy { padding: 48px 36px; border-right: 0; border-bottom: 1px solid var(--line-soft); }
-      .mood-photos { grid-template-columns: repeat(3, 1fr); min-height: 340px; }
-      .mood-photo img { height: 340px; }
-
-      .contact-panel {
-        grid-template-columns: 1fr;
-        padding: 40px;
-      }
-
-      .mosaic { grid-template-columns: repeat(6, 1fr); }
-      .m-w { grid-column: span 4; }
-      .m-t { grid-column: span 2; }
-      .m-s { grid-column: span 3; }
-      .m-m { grid-column: span 3; }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @media (max-width: 720px) {
-      .nav-links, .nav-cta { display: none; }
-      .burger { display: inline-flex; }
-
-      section { padding: 72px 0; }
-
-      .hero-h1 { font-size: clamp(4.4rem, 20vw, 7rem); }
-
-      /* Mobile hero shows image visually */
-      .hero { min-height: 100svh; align-items: flex-end; }
-      .hero-bg { background-position: center top; }
-      .hero-overlay {
-        background: linear-gradient(180deg,
-          rgba(8,9,14,0.2) 0%,
-          rgba(8,9,14,0.08) 30%,
-          rgba(8,9,14,0.6) 60%,
-          rgba(8,9,14,0.96) 100%
-        );
-      }
-
-      .hero-content { padding-bottom: 52px; }
-      .hero-row { flex-direction: column; align-items: flex-start; gap: 18px; }
-      .hero-btns { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
-      .btn-gold, .btn-ghost, .btn-wa { justify-content: center; padding: 13px 18px; font-size: 0.68rem; }
-
-      .intro-text-panel { padding: 28px 24px; }
-      .intro-img-panel { min-height: 320px; }
-
-      .services-grid { grid-template-columns: 1fr; gap: 10px; }
-
-      .services-head { gap: 16px; }
-
-      .mood-photos { min-height: 240px; }
-      .mood-photo img { height: 240px; }
-
-      .mosaic { display: flex; flex-direction: column; gap: 10px; }
-      .m-item { height: 260px; border-radius: 20px; }
-      .m-w, .m-t, .m-s, .m-m { grid-column: unset; grid-row: unset; }
-
-      .about-card { padding: 28px 24px; }
-      .about-photo { min-height: 340px; }
-      .stats { grid-template-columns: repeat(3, 1fr); }
-
-      .contact-panel { padding: 28px 24px; }
-
-      .gallery-head { flex-direction: column; align-items: flex-start; gap: 18px; }
-
-      .display-title { font-size: clamp(2.8rem, 10vw, 4.8rem); }
-    }
-
-
-    /* ── LENSES BY KAS ADDITIONS ── */
-    .stories { background: var(--ink); }
-    .story-grid {
+    /* INTRO */
+    .intro {
+      background: var(--ivory);
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 48px;
+      gap: 42px;
     }
-    .story-card {
-      border-radius: var(--r);
-      overflow: hidden;
+
+    .intro-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .intro-card {
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
+      padding: 26px;
+      background: rgba(255,255,255,0.34);
+    }
+
+    .intro-card h3 {
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+
+    .intro-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 0.96rem;
+    }
+
+    /* PATHWAYS */
+    .pathways {
+      background: var(--soft-black);
+      color: var(--white);
+    }
+
+    .pathways .section-text {
+      color: rgba(255,255,255,0.68);
+    }
+
+    .pathway-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .path-card {
+      min-height: 430px;
       position: relative;
-      min-height: 520px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: flex-end;
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      background: #111;
+      box-shadow: var(--shadow);
     }
-    .story-card:hover { transform: translateY(-6px); border-color: rgba(201,151,58,0.38); }
-    .story-card img {
+
+    .path-card img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -995,461 +439,750 @@
       object-fit: cover;
       transition: transform 0.7s ease;
     }
-    .story-card:hover img { transform: scale(1.06); }
-    .story-card::after {
+
+    .path-card::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 36%, rgba(8,9,14,0.88) 100%);
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent);
     }
-    .story-copy { position: relative; z-index: 2; padding: 24px; }
-    .story-copy span {
-      display: inline-flex;
-      margin-bottom: 10px;
-      color: var(--gold-light);
-      font-size: 0.62rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
+
+    .path-card:hover img {
+      transform: scale(1.06);
+    }
+
+    .path-content {
+      position: relative;
+      z-index: 2;
+      padding: 28px;
+    }
+
+    .path-content span {
+      font-size: 0.68rem;
       text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--champagne);
     }
-    .story-copy h3 {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 2.1rem;
-      line-height: 0.95;
-      font-weight: 300;
-      margin-bottom: 8px;
-    }
-    .story-copy p {
-      color: var(--cream-dim);
-      font-size: 0.82rem;
-      font-weight: 300;
-      line-height: 1.6;
-    }
-    .about-photo img { object-position: center top; }
-    @media (max-width: 1024px) { .story-grid { grid-template-columns: 1fr; } .story-card { min-height: 440px; } }
 
+    .path-content h3 {
+      font-size: 2.4rem;
+      margin: 10px 0;
+    }
 
-    /* ── FIXED HERO SLIDESHOW ── */
-    .hero-bg.hero-slideshow {
-      position: absolute;
-      inset: 0;
+    .path-content p {
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* GALLERY */
+    .gallery {
+      background: var(--cream);
+    }
+
+    .lookbook {
+      display: grid;
+      gap: 18px;
+    }
+
+    .look {
+      position: relative;
       overflow: hidden;
-      background: #07080c;
-      animation: none !important;
-      transform: none !important;
+      background: var(--black);
+      min-height: 420px;
+      box-shadow: var(--shadow);
     }
 
-    .hero-bg.hero-slideshow .hero-slide {
+    .look.large {
+      min-height: 560px;
+    }
+
+    .look img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       position: absolute;
       inset: 0;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      opacity: 0;
-      transform: scale(1.04);
-      transition: opacity 1.15s ease, transform 6s ease;
-      will-change: opacity, transform;
+      transition: transform 0.7s ease;
     }
 
-    .hero-bg.hero-slideshow .hero-slide.active {
-      opacity: 1;
-      transform: scale(1.11) translate(-1%, -1%);
+    .look:hover img {
+      transform: scale(1.055);
+    }
+
+    .look-caption {
+      position: absolute;
+      left: 22px;
+      bottom: 22px;
+      right: 22px;
+      z-index: 2;
+      color: var(--white);
+      background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+      padding-top: 80px;
+    }
+
+    .look::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.64), transparent 52%);
       z-index: 1;
     }
 
-    .hero-bg.hero-slideshow .hero-slide::after {
+    .look-caption h3 {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .look-caption p {
+      color: rgba(255,255,255,0.74);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* MOTION VIDEO */
+    .motion {
+      position: relative;
+      min-height: 76vh;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      background: var(--black);
+      overflow: hidden;
+    }
+
+    .motion video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+
+    .motion::after {
       content: "";
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(7,8,12,0.72), rgba(7,8,12,0.24)),
-        linear-gradient(180deg, rgba(7,8,12,0.16), rgba(7,8,12,0.82));
+        linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.42), rgba(0,0,0,0.78)),
+        radial-gradient(circle at 70% 50%, rgba(214,183,122,0.12), transparent 34%);
     }
 
-    .hero-slide-progress {
-      position: absolute;
-      z-index: 5;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: 2px;
-      background: rgba(247,239,226,0.1);
+    .motion-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+
+    .motion h2 {
+      font-size: clamp(3.4rem, 10vw, 8rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 20px;
+    }
+
+    .motion p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      font-size: 1.05rem;
+    }
+
+    /* ACADEMY */
+    .academy {
+      background: var(--ivory);
       overflow: hidden;
     }
 
-    .hero-slide-progress span {
-      display: block;
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      animation: slideProgress 4.2s linear infinite;
+    .academy-wrap {
+      display: grid;
+      gap: 44px;
+      align-items: center;
     }
 
-    @keyframes slideProgress {
-      from { width: 0; }
-      to { width: 100%; }
+    .academy-logo-wrap {
+      width: min(300px, 70vw);
+      margin-bottom: 26px;
+      opacity: 0;
+      transform: scale(0.84) translateY(20px);
+      transition: opacity 1s ease, transform 1s cubic-bezier(.2,.8,.2,1);
     }
 
+    .academy-logo-wrap.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
 
-    @media (max-width: 720px) {
-      .hero-bg.hero-slideshow .hero-slide {
-        background-position: center top;
+    .academy-logo-wrap img {
+      width: 100%;
+      filter: drop-shadow(0 16px 34px rgba(0,0,0,0.16));
+    }
+
+    .academy-copy h2 {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      letter-spacing: -0.05em;
+      margin-bottom: 20px;
+    }
+
+    .academy-copy p {
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1.02rem;
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+
+    .academy-points {
+      display: grid;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .academy-points div {
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--brown);
+    }
+
+    .academy-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .academy-images img {
+      height: 230px;
+      width: 100%;
+      object-fit: cover;
+      filter: saturate(0.92);
+    }
+
+    .academy-images img:nth-child(1) {
+      grid-column: span 2;
+      height: 360px;
+    }
+
+    /* DIASPORA */
+    .diaspora {
+      background: var(--soft-black);
+      color: var(--white);
+      display: grid;
+      gap: 36px;
+      align-items: center;
+    }
+
+    .diaspora .section-text {
+      color: rgba(255,255,255,0.7);
+    }
+
+    .diaspora-panel {
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: clamp(28px, 5vw, 56px);
+      background:
+        linear-gradient(135deg, rgba(214,183,122,0.1), transparent),
+        rgba(255,255,255,0.03);
+    }
+
+    .diaspora-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .diaspora-list div {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.74);
+    }
+
+    .diaspora-list strong {
+      color: var(--champagne);
+      font-weight: 500;
+    }
+
+    /* CTA */
+    .final-cta {
+      min-height: 70vh;
+      background:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.74)),
+        url("gold-sculpted-evening-gown.1.jpg") center top / cover;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .final-cta-inner {
+      max-width: 900px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(3.4rem, 10vw, 8rem);
+      letter-spacing: -0.06em;
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.8;
+      max-width: 650px;
+      margin: 0 auto 30px;
+    }
+
+    footer {
+      background: var(--black);
+      color: rgba(255,255,255,0.58);
+      padding: 36px clamp(20px, 6vw, 88px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 0.8rem;
+    }
+
+    footer span {
+      color: var(--champagne);
+    }
+
+    @media (min-width: 720px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .hero-meta {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .intro-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .pathway-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .lookbook {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .look.large {
+        grid-column: span 2;
+      }
+
+      .academy-wrap {
+        grid-template-columns: 0.95fr 1.05fr;
+      }
+
+      .diaspora {
+        grid-template-columns: 1fr 0.85fr;
+      }
+
+      footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
       }
     }
 
+    @media (min-width: 1024px) {
+      .pathway-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .path-card {
+        min-height: 540px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .nav {
+        padding-inline: 16px;
+      }
+
+      .nav-brand span {
+        display: none;
+      }
+
+      .nav-cta {
+        padding: 10px 13px;
+      }
+
+      .hero-content {
+        padding-bottom: 38px;
+      }
+
+      .hero-bg img {
+        object-position: center top;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .path-card,
+      .look,
+      .look.large {
+        min-height: 430px;
+      }
+
+      .academy-images img,
+      .academy-images img:nth-child(1) {
+        height: 250px;
+      }
+    }
   </style>
 </head>
 
 <body>
-  <div id="loader">
-    <div class="loader-logo">Lenses by Kas</div>
-    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+
+  <!-- Opening Loader -->
+  <div class="loader" id="loader">
+    <img src="SBL-Transperant-logo.png" alt="Styledbylayo Logo" class="loader-logo">
   </div>
 
-  <div class="grain"></div>
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-brand">
+      <img src="SBL-Transperant-logo.png" alt="Styledbylayo">
+      <span>Styledbylayo</span>
+    </a>
 
-  <!-- NAV -->
-  <nav id="mainNav">
-    <div class="nav-inner">
-      <a href="#" class="logo"><span class="logo-dot"></span>Lenses by Kas</a>
+    <nav class="nav-links">
+      <a href="#collections">Collections</a>
+      <a href="#academy">Academy</a>
+      <a href="#worldwide">Worldwide</a>
+    </nav>
 
-      <div class="nav-links">
-        <a href="#gallery">Gallery</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-      </div>
-
-      <a class="nav-cta" href="https://wa.me/2348081116729" target="_blank" rel="noopener">Book Now</a>
-
-      <button class="burger" id="burgerBtn" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <div class="mob-menu" id="mobMenu">
-    <a href="#gallery">Gallery</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#contact">Book on WhatsApp</a>
-  </div>
-
-  <!-- HERO -->
-  <header class="hero" id="home">
-    <div class="hero-bg hero-slideshow" aria-hidden="true">
-      <div class="hero-slide active" style="background-image: url('kas-wedding-look11.jpg');"></div>
-      <div class="hero-slide" style="background-image: url('kas-couple-look4.jpg');"></div>
-      <div class="hero-slide" style="background-image: url('kas-wedding-look9.jpg');"></div>
-      <div class="hero-slide" style="background-image: url('Kas-portrait-colored-look3.jpg');"></div>
-      <div class="hero-slide" style="background-image: url('kas-wedding-look10.jpg');"></div>
-    </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-slide-progress"><span></span></div>
-    <div class="hero-content">
-      <div class="hero-tag"><span class="hero-tag-line"></span> Adebola Samuel · Surulere, Lagos</div>
-      <h1 class="hero-h1">Weddings in<br><em>focus.</em></h1>
-      <div class="hero-row">
-        <p class="hero-sub">Elegant wedding, portrait, anniversary, and lifestyle photography by Lenses by Kas, crafted for couples, families, and people who want memories with class.</p>
-        <div class="hero-btns">
-          <a class="btn-wa" href="https://wa.me/2348081116729?text=Hello%20Lenses%20by%20Kas%2C%20I%20would%20like%20to%20book%20a%20photography%20session." target="_blank" rel="noopener">
-            Book Now
-          </a>
-          <a class="btn-ghost" href="#gallery">View Work</a>
-        </div>
-      </div>
-    </div>
+    <a href="#consultation" class="nav-cta">Book Consultation</a>
   </header>
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-track">
-      <span>Weddings <b>·</b></span><span>Portraits <b>·</b></span><span>Anniversary Shoots <b>·</b></span><span>Couples <b>·</b></span><span>Events <b>·</b></span><span>Surulere Lagos <b>·</b></span><span>WhatsApp Booking <b>·</b></span>
-      <span>Weddings <b>·</b></span><span>Portraits <b>·</b></span><span>Anniversary Shoots <b>·</b></span><span>Couples <b>·</b></span><span>Events <b>·</b></span><span>Surulere Lagos <b>·</b></span><span>WhatsApp Booking <b>·</b></span>
+  <!-- Hero -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero-bg">
+        <img src="butterfly-beaded-evening-gown.1.jpg" alt="Styledbylayo butterfly beaded evening gown">
+      </div>
+
+      <div class="hero-content reveal">
+        <div class="eyebrow">7 Star Rated Fashion Brand</div>
+        <h1>Styled for presence.</h1>
+        <p>
+          A Lagos-based fashion house creating bridal pieces, custom couture,
+          ready-to-wear designs and fashion education for women who want to look unforgettable.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#consultation">Book a Consultation</a>
+          <a class="btn btn-outline" href="#collections">View Collections</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <strong>57.8K</strong>
+        <span>Instagram Community</span>
+      </div>
+      <div class="hero-stat">
+        <strong>Bridal</strong>
+        <span>Custom Pieces</span>
+      </div>
+      <div class="hero-stat">
+        <strong>RTW</strong>
+        <span>Signature Looks</span>
+      </div>
+      <div class="hero-stat">
+        <strong>Global</strong>
+        <span>Worldwide Shipping</span>
+      </div>
     </div>
-  </div>
-
-  <main>
-    <!-- INTRO -->
-    <section id="intro">
-      <div class="wrap">
-        <div class="reveal">
-          <div class="label"><span class="label-line"></span> The Work</div>
-          <h2 class="display-title">Romance, portraits<br>and quiet details.</h2>
-        </div>
-        <div class="intro-grid">
-          <div class="intro-text-panel reveal reveal-delay-1">
-            <div>
-              <p>Lenses by Kas captures weddings, portraits, and couple moments with a refined eye. The approach is intimate, polished, and built around preserving the feeling of the day.</p>
-              <p>This demo gives the brand a stronger first impression: cinematic, mobile-friendly, premium, and easy to book through WhatsApp or Instagram.</p>
-            </div>
-            <div class="intro-pills">
-              <span class="pill">Premium feel</span>
-              <span class="pill">Mobile-first</span>
-              <span class="pill">WhatsApp booking</span>
-              <span class="pill">Clear services</span>
-            </div>
-          </div>
-          <div class="intro-img-panel reveal reveal-delay-2">
-            <img src="kas-couple-look4.jpg" alt="Lenses by Kas photography" loading="lazy" />
-            <div class="float-card">
-              <strong>Anniversary storytelling.</strong>
-              Couple sessions presented with softness, intimacy, and a premium editorial feel.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SERVICES -->
-    <section id="services" class="services-section">
-      <div class="wrap">
-        <div class="services-head">
-          <div class="reveal">
-            <div class="label"><span class="label-line"></span> Services</div>
-            <h2 class="display-title">What clients<br>can book.</h2>
-          </div>
-          <p class="services-desc reveal reveal-delay-1">
-            The site makes the offer clear: weddings, portraits, anniversary sessions, and event coverage without making visitors dig through Instagram.
-          </p>
-        </div>
-
-        <div class="services-grid">
-          <article class="svc-card reveal reveal-delay-1">
-            <div class="svc-img">
-              <img src="Kas-portrait-colored-look3.jpg" alt="Portraits" loading="lazy" />
-              <span class="svc-num">01</span>
-            </div>
-            <div class="svc-info">
-              <h3>Portraits</h3>
-              <p>Clean individual portraits for birthdays, personal branding, lifestyle, and profile-ready images.</p>
-            </div>
-          </article>
-
-          <article class="svc-card reveal reveal-delay-2">
-            <div class="svc-img">
-              <img src="kas-wedding-look7.jpg" alt="Events" loading="lazy" />
-              <span class="svc-num">02</span>
-            </div>
-            <div class="svc-info">
-              <h3>Weddings</h3>
-              <p>Elegant wedding coverage for ceremonies, receptions, bridal moments, and emotional details.</p>
-            </div>
-          </article>
-
-          <article class="svc-card reveal reveal-delay-3">
-            <div class="svc-img">
-              <img src="kas-couple-look5.jpg" alt="Lifestyle" loading="lazy" />
-              <span class="svc-num">03</span>
-            </div>
-            <div class="svc-info">
-              <h3>Couples</h3>
-              <p>Anniversary and couple sessions that feel romantic, intentional, and easy to remember.</p>
-            </div>
-          </article>
-
-          <article class="svc-card reveal reveal-delay-4">
-            <div class="svc-img">
-              <img src="kas-wedding-look10.jpg" alt="Couple Sessions" loading="lazy" />
-              <span class="svc-num">04</span>
-            </div>
-            <div class="svc-info">
-              <h3>Events</h3>
-              <p>Coverage for intimate events, celebrations, and special moments that deserve lasting photos.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- MOOD STRIP -->
-    <section class="mood" id="mood" style="padding:0;">
-      <div class="mood-inner">
-        <div class="mood-copy reveal">
-          <div class="label"><span class="label-line"></span> The Mood</div>
-          <h2 class="display-title" style="font-size:clamp(2.6rem,5vw,5rem);">Soft light.<br>Sharp memory.</h2>
-          <p>An editorial pause that gives the site atmosphere and makes the work feel curated, not like a regular photo dump.</p>
-        </div>
-        <div class="mood-photos">
-          <div class="mood-photo reveal"><img src="kas-wedding-bw-look8.jpg" alt="" loading="lazy" /></div>
-          <div class="mood-photo reveal reveal-delay-1"><img src="Kas-portrait-BW-Look2.jpg" alt="" loading="lazy" /></div>
-          <div class="mood-photo reveal reveal-delay-2"><img src="kas-couple-look6.jpg" alt="" loading="lazy" /></div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- FEATURED STORIES -->
-    <section class="stories">
-      <div class="wrap">
-        <div class="reveal">
-          <div class="label"><span class="label-line"></span> Featured Stories</div>
-          <h2 class="display-title">Three ways<br>Kas frames love.</h2>
-        </div>
-
-        <div class="story-grid">
-          <article class="story-card reveal reveal-delay-1">
-            <img src="kas-couple-look6.jpg" alt="Couple anniversary shoot" loading="lazy" />
-            <div class="story-copy">
-              <span>Anniversary</span>
-              <h3>Couple portraits with warmth.</h3>
-              <p>Soft, romantic images for couples celebrating their story and connection.</p>
-            </div>
-          </article>
-
-          <article class="story-card reveal reveal-delay-2">
-            <img src="kas-wedding-look11.jpg" alt="Wedding photography" loading="lazy" />
-            <div class="story-copy">
-              <span>Wedding</span>
-              <h3>Wedding moments with emotion.</h3>
-              <p>Elegant frames for ceremonies, smiles, quiet glances, and once-in-a-lifetime details.</p>
-            </div>
-          </article>
-
-          <article class="story-card reveal reveal-delay-3">
-            <img src="Kas-portrait-colored-look3.jpg" alt="Portrait photography" loading="lazy" />
-            <div class="story-copy">
-              <span>Portrait</span>
-              <h3>Portraits with presence.</h3>
-              <p>Clean portraits that help clients look confident, personal, and polished.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY -->
-    <section id="gallery" class="gallery-section">
-      <div class="wrap">
-        <div class="gallery-head reveal">
-          <div>
-            <div class="label"><span class="label-line"></span> Selected Frames</div>
-            <h2 class="display-title">A curated<br>visual proof.</h2>
-          </div>
-          <a class="btn-ghost" href="https://www.instagram.com/lensesbykas/" target="_blank" rel="noopener">Instagram ↗</a>
-        </div>
-
-        <div class="mosaic">
-          <div class="m-item m-xl reveal" data-l="Wedding"><img src="kas-wedding-look7.jpg" alt="Wedding photography by Lenses by Kas" loading="lazy" /></div>
-          <div class="m-item m-t reveal reveal-delay-1" data-l="Black & White"><img src="kas-wedding-bw-look8.jpg" alt="Black and white wedding photography by Lenses by Kas" loading="lazy" /></div>
-          <div class="m-item m-s reveal reveal-delay-2" data-l="Couple"><img src="kas-couple-look5.jpg" alt="Couple anniversary shoot by Lenses by Kas" loading="lazy" /></div>
-          <div class="m-item m-m reveal reveal-delay-1" data-l="Couple"><img src="kas-couple-look6.jpg" alt="Couple anniversary shoot by Lenses by Kas" loading="lazy" /></div>
-          <div class="m-item m-s reveal reveal-delay-2" data-l="Wedding"><img src="kas-wedding-look10.jpg" alt="Wedding image by Lenses by Kas" loading="lazy" /></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="wrap">
-        <div class="about-grid">
-          <div class="about-card reveal">
-            <div>
-              <div class="label"><span class="label-line"></span> About</div>
-              <h2 class="display-title" style="margin-bottom:24px;">Adebola<br>Samuel.</h2>
-              <p>Adebola Samuel, known through Lenses by Kas, is a Surulere-based photographer focused on weddings, portraits, and moments that deserve to be remembered with care.</p>
-              <p>The brand direction is classy and personal: strong enough for weddings, warm enough for couple shoots, and clean enough for portraits and fast bookings.</p>
-            </div>
-            <div class="stats">
-              <div class="stat"><strong>91</strong><span>Posts</span></div>
-              <div class="stat"><strong>2.6k</strong><span>Followers</span></div>
-              <div class="stat"><strong>24/7</strong><span>Booking</span></div>
-            </div>
-          </div>
-          <div class="about-photo reveal reveal-delay-2">
-            <img src="KAS-OWNER-LOOK1.jpg" alt="Adebola Samuel, photographer behind Lenses by Kas" loading="lazy" />
-            <div class="float-card">
-              <strong>Meet Kas.</strong> A clear founder section makes the brand feel more human, credible, and easier to trust.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="contact-section">
-      <div class="wrap">
-        <div class="contact-panel reveal">
-          <div>
-            <div class="label"><span class="label-line"></span> Book a Session</div>
-            <h2 class="display-title">Ready to plan<br>your shoot?</h2>
-            <p>Send your shoot type, date, location, and the kind of photography you want. Lenses by Kas can follow up with availability, package details, and next steps.</p>
-          </div>
-          <div class="contact-actions">
-            <a class="btn-wa" href="https://wa.me/2348081116729?text=Hello%20Lenses%20by%20Kas%2C%20I%20would%20like%20to%20book%20a%20photography%20session." target="_blank" rel="noopener">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              Book via WhatsApp
-            </a>
-            <a class="btn-ghost" href="https://www.instagram.com/lensesbykas/" target="_blank" rel="noopener">Visit Instagram</a>
-            <div class="info-chip">
-              <span>Booking details</span>
-              <strong>Phone: 08081116729 · Surulere, Lagos.</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="wrap footer-inner">
-      <span>© 2026 <b>Lenses by Kas.</b></span>
-      <span>Concept preview by <b>Built by Sammie</b>. Final website can be completed after approval.</span>
+  <!-- Intro -->
+  <section class="intro">
+    <div class="section-head reveal">
+      <div class="section-kicker">The Brand Experience</div>
+      <h2 class="section-title">A more elevated home for every side of the brand.</h2>
+      <p class="section-text">
+        Styledbylayo already carries a strong visual identity across Instagram.
+        This concept brings the brand into one refined online experience where clients,
+        students and diaspora buyers can move clearly from discovery to consultation.
+      </p>
     </div>
+
+    <div class="intro-grid">
+      <article class="intro-card reveal">
+        <h3>Bridal & Custom</h3>
+        <p>Statement pieces for weddings, birthdays, red-carpet moments and unforgettable personal celebrations.</p>
+      </article>
+
+      <article class="intro-card reveal">
+        <h3>Ready-to-Wear</h3>
+        <p>Signature looks and polished pieces presented with the same care as a luxury editorial collection.</p>
+      </article>
+
+      <article class="intro-card reveal">
+        <h3>Fashion Academy</h3>
+        <p>A clear pathway for aspiring designers to discover the academy, understand the offer and take the next step.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Pathways -->
+  <section class="pathways" id="collections">
+    <div class="section-head reveal">
+      <div class="section-kicker">Choose Your Experience</div>
+      <h2 class="section-title">One brand. Four clear pathways.</h2>
+      <p class="section-text">
+        Instead of making visitors jump between Instagram, Linktree, price guides and PDFs,
+        the website can guide each person to the part of Styledbylayo they came for.
+      </p>
+    </div>
+
+    <div class="pathway-grid">
+      <article class="path-card reveal">
+        <img src="gold-sculpted-evening-gown.1.jpg" alt="Gold sculpted evening gown">
+        <div class="path-content">
+          <span>01</span>
+          <h3>Bridal & Custom</h3>
+          <p>Elegant custom designs for brides, celebrants and women dressing for once-in-a-lifetime moments.</p>
+        </div>
+      </article>
+
+      <article class="path-card reveal">
+        <img src="pink-green-beaded-mini-dress.1.jpg" alt="Pink and green beaded mini dress">
+        <div class="path-content">
+          <span>02</span>
+          <h3>Ready-to-Wear</h3>
+          <p>Statement pieces for clients who want the Styledbylayo effect without a full custom process.</p>
+        </div>
+      </article>
+
+      <article class="path-card reveal">
+        <img src="SBLFA-Acedemy2.jpg" alt="Styledbylayo Fashion Academy">
+        <div class="path-content">
+          <span>03</span>
+          <h3>Academy</h3>
+          <p>Training Africa’s next generation of fashion leaders through creativity, structure and passion.</p>
+        </div>
+      </article>
+
+      <article class="path-card reveal">
+        <img src="emerald-beaded-couture-gown.1.jpg" alt="Emerald couture gown">
+        <div class="path-content">
+          <span>04</span>
+          <h3>Consultation</h3>
+          <p>A clearer booking journey for clients who want to understand the process before reaching out.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery">
+    <div class="section-head reveal">
+      <div class="section-kicker">Signature Looks</div>
+      <h2 class="section-title">Designed to be remembered.</h2>
+      <p class="section-text">
+        The visual system should feel curated, not crowded. Each look gets enough room to breathe,
+        so the details, silhouette and quality of the brand feel intentional.
+      </p>
+    </div>
+
+    <div class="lookbook">
+      <article class="look large reveal">
+        <img src="butterfly-beaded-evening-gown.2.jpg" alt="Butterfly beaded evening gown">
+        <div class="look-caption">
+          <h3>Butterfly Beaded Gown</h3>
+          <p>A dramatic evening piece with sculpted beading and statement butterfly details.</p>
+        </div>
+      </article>
+
+      <article class="look reveal">
+        <img src="gold-sculpted-evening-gown.2.jpg" alt="Gold sculpted evening gown">
+        <div class="look-caption">
+          <h3>Gold Sculpted Gown</h3>
+          <p>Luxury eveningwear shaped for elegance, volume and presence.</p>
+        </div>
+      </article>
+
+      <article class="look reveal">
+        <img src="emerald-beaded-couture-gown.3.jpg" alt="Emerald beaded couture gown">
+        <div class="look-caption">
+          <h3>Emerald Couture</h3>
+          <p>Rich colour, beadwork and structure for a bold high-fashion statement.</p>
+        </div>
+      </article>
+
+      <article class="look reveal">
+        <img src="black-embroidered-menswear-suit.1.jpg" alt="Black embroidered menswear suit">
+        <div class="look-caption">
+          <h3>Custom Menswear</h3>
+          <p>Editorial tailoring with sharp detail and modern fashion confidence.</p>
+        </div>
+      </article>
+
+      <article class="look large reveal">
+        <img src="pink-green-beaded-mini-dress.2.jpg" alt="Pink green beaded mini dress">
+        <div class="look-caption">
+          <h3>Party Statement</h3>
+          <p>A playful beaded mini dress made for movement, colour and attention.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Motion Video -->
+  <section class="motion">
+    <video autoplay muted loop playsinline>
+      <source src="butterfly-beaded-evening-gown.SBL.mp4" type="video/mp4">
+    </video>
+
+    <div class="motion-content reveal">
+      <div class="eyebrow">Styledbylayo In Motion</div>
+      <h2>More than a look.</h2>
+      <p>
+        Fashion becomes more powerful when clients can see movement, detail and presence.
+        A selected motion section can make the website feel alive without turning it into a noisy social feed.
+      </p>
+    </div>
+  </section>
+
+  <!-- Academy -->
+  <section class="academy" id="academy">
+    <div class="academy-wrap">
+      <div class="academy-copy reveal">
+        <div class="academy-logo-wrap" id="academyLogo">
+          <img src="SBLFA-LOGO-Transperant-Acedemy1.png" alt="SBL Fashion Academy Logo">
+        </div>
+
+        <div class="section-kicker">SBL Fashion Academy</div>
+        <h2>Shaping Africa’s next generation of fashion leaders.</h2>
+        <p>
+          A subsidiary of Styledbylayo, the academy deserves its own clear presence inside the brand ecosystem.
+          This section makes it easy for aspiring designers to understand the academy, feel the standard,
+          and take the next step.
+        </p>
+
+        <div class="academy-points">
+          <div>Fashion School in Lagos</div>
+          <div>Powered by Creativity & Passion</div>
+          <div>Training for Aspiring Fashion Leaders</div>
+        </div>
+
+        <a class="btn btn-primary" href="#consultation">Explore the Academy</a>
+      </div>
+
+      <div class="academy-images reveal">
+        <img src="SBLFA-Acedemy3.jpg" alt="SBL Fashion Academy class moment">
+        <img src="SBLFA-Acedemy4.jpg" alt="SBL Fashion Academy training">
+        <img src="SBLFA-Acedemy5.jpg" alt="SBL Fashion Academy students">
+        <img src="SBLFA-Acedemy6.jpg" alt="SBL Fashion Academy creative training">
+        <img src="SBLFA-Acedemy7.jpg" alt="SBL Fashion Academy fashion learning">
+      </div>
+    </div>
+  </section>
+
+  <!-- Diaspora / Worldwide -->
+  <section class="diaspora" id="worldwide">
+    <div class="section-head reveal">
+      <div class="section-kicker">Made in Lagos. Worn Worldwide.</div>
+      <h2 class="section-title">Built for serious clients at home and abroad.</h2>
+      <p class="section-text">
+        For diaspora clients, bridal clients and buyers outside Lagos, the website should reduce doubt.
+        Clear process, shipping details, consultations and visual proof can help clients feel safer before ordering.
+      </p>
+    </div>
+
+    <div class="diaspora-panel reveal">
+      <h3 style="font-size: 2.6rem; margin-bottom: 16px;">A clearer client journey.</h3>
+      <p style="color: rgba(255,255,255,0.68); line-height: 1.8;">
+        This concept positions the website as more than a gallery. It becomes the polished bridge between discovery,
+        trust and consultation.
+      </p>
+
+      <div class="diaspora-list">
+        <div><span>Consultation</span><strong>By Appointment</strong></div>
+        <div><span>Shipping</span><strong>Worldwide</strong></div>
+        <div><span>Offers</span><strong>Bridal · RTW · Academy</strong></div>
+        <div><span>Trust</span><strong>Gallery · Process · Proof</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta" id="consultation">
+    <div class="final-cta-inner reveal">
+      <div class="eyebrow">Begin the Experience</div>
+      <h2>Ready to create your look?</h2>
+      <p>
+        A premium redesign can make Styledbylayo’s online presence feel as refined,
+        structured and memorable as the pieces themselves.
+      </p>
+
+      <div class="hero-actions" style="justify-content:center;">
+        <a class="btn btn-primary" href="https://wa.me/" target="_blank" rel="noopener">Book Consultation</a>
+        <a class="btn btn-outline" href="#academy">View Academy</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p><span>Styledbylayo</span> premium website concept.</p>
+    <p>Bridal · Custom · RTW · Fashion Academy · Worldwide Shipping</p>
   </footer>
 
   <script>
-    // LOADER
-    const loader = document.getElementById('loader');
-    function finishLoader() { if (loader) loader.classList.add('done'); }
-    document.addEventListener('DOMContentLoaded', () => setTimeout(finishLoader, 1700));
-    setTimeout(finishLoader, 2800);
+    const nav = document.getElementById("nav");
 
-    // NAV SCROLL
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
-
-    // BURGER
-    const burger = document.getElementById('burgerBtn');
-    const menu = document.getElementById('mobMenu');
-    burger.addEventListener('click', () => {
-      const open = menu.classList.toggle('open');
-      burger.setAttribute('aria-expanded', open);
-    });
-    menu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        menu.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-      });
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) {
+        nav.classList.add("scrolled");
+      } else {
+        nav.classList.remove("scrolled");
+      }
     });
 
-    // HERO SLIDESHOW
-    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
-    let currentHeroSlide = 0;
-
-    function activateHeroSlide(index) {
-      heroSlides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
       });
+    }, {
+      threshold: 0.14
+    });
+
+    document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+    const academyLogo = document.getElementById("academyLogo");
+
+    const academyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          academyLogo.classList.add("visible");
+        }
+      });
+    }, {
+      threshold: 0.35
+    });
+
+    if (academyLogo) {
+      academyObserver.observe(academyLogo);
     }
 
-    if (heroSlides.length > 1) {
-      activateHeroSlide(0);
-      setInterval(() => {
-        currentHeroSlide = (currentHeroSlide + 1) % heroSlides.length;
-        activateHeroSlide(currentHeroSlide);
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const loader = document.getElementById("loader");
+        if (loader) loader.style.display = "none";
       }, 4200);
-    }
-
-    // SCROLL REVEAL
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
-      });
-    }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
-    reveals.forEach(el => obs.observe(el));
+    });
   </script>
+
 </body>
 </html>
